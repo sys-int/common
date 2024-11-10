@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "common"
+version = "0.1.0"
+description = ""
+authors = ["Marc Ende <me@e-beyond.de>"]
+license = "none"
+packages = [{ include = "common", from = "src" }]
+
+[tool.poetry.dependencies]
+python = "^3.13"
+pulumi = "^3.35.3"
+common = { git = "git+ssh://git@github.com/sys-int/common.git", branch = "develop" }
+
+[tool.poetry.dev-dependencies]
+pytest = "^6.2.4"
+mypy = "^0.910"
+black = "^21.6b0"
+flake8 = "^3.9.2"
+isort = "^5.9.3"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
