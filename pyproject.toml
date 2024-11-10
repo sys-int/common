@@ -9,7 +9,6 @@ packages = [{ include = "common", from = "src" }]
 [tool.poetry.dependencies]
 python = "^3.13"
 pulumi = "^3.35.3"
-common = { git = "git+ssh://git@github.com/sys-int/common.git", branch = "develop" }
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.2.4"
