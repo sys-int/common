@@ -14,7 +14,7 @@ pulumi = "^3.35.3"
 pytest = "^8.0.0"
 mypy = "^1.0.0"
 black = "^21.6b0"
-flake8 = "^3.9.2"
+flake8 = "^7.0.0"
 isort = "^5.9.3"
 
 [build-system]
