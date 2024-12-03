@@ -1,6 +1,6 @@
 import pulumi
 from icecream import ic
-from pulumi_hcloud import Network, Server
+from pulumi_hcloud import Network, Server, ServerNetworkArgs
 
 
 class PrivateServer(pulumi.ComponentResource):
@@ -9,6 +9,9 @@ class PrivateServer(pulumi.ComponentResource):
         network_name = network.name
         network_id = network.id
         ic(network_id)
+
+        arg = ServerNetworkArgs()
+        arg.network_id = network_id
 
         # Create the server with private network interface
         server = Server(
@@ -22,11 +25,7 @@ class PrivateServer(pulumi.ComponentResource):
                     "ipv6_enabled": False,
                 }
             ],
-            networks=[
-                {
-                    "network_id": network_id,
-                }
-            ],
+            networks=[arg],
             opts=pulumi.ResourceOptions(parent=self),
         )
 
