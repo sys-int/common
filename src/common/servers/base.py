@@ -9,7 +9,7 @@ class PrivateServer(pulumi.ComponentResource):
         network_name = network.name
         network_id = network.id
         ic(network_id)
-        arg = ServerNetworkArgs(network_id=network.id)
+        arg = ServerNetworkArgs(network_id=int(network.id))
 
         # Create the server with private network interface
         server = Server(
