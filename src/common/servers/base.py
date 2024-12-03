@@ -24,7 +24,7 @@ class PrivateServer(pulumi.ComponentResource):
                     "ipv6_enabled": False,
                 }
             ],
-            networks=[private_network.id],
+            networks=[{"network_id": private_network.id}],
             opts=pulumi.ResourceOptions(parent=self),
         )
 
