@@ -7,7 +7,7 @@ class PrivateServer(pulumi.ComponentResource):
     def __init__(self, name, network: Network, server_args, opts=None):
         super().__init__("sys-int:servers:PrivateServer", f"server-private-{name}", None, opts)
         network_name = network.name
-        network_id: int = network.id.apply(lambda x: int(x))
+        network_id: int = int(network.id)
         ic(network_id)
         arg = ServerNetworkArgs(network_id=network_id)
 
