@@ -1,16 +1,19 @@
 import pulumi
+from icecream import ic
 from pulumi_hcloud import Network, Server
 
 
 class PrivateServer(pulumi.ComponentResource):
-    def __init__(self, name, private_network: Network, server_args, opts=None):
-        network_name = private_network.name
+    def __init__(self, name, network: Network, server_args, opts=None):
+        network_name = network.name
+        network_id = network.id
         super().__init__(
             "sys-int:servers:PrivateServer",
             f"{network_name}-{name}",
             None,
             opts,
         )
+        ic(network_id)
 
         # Create the server with private network interface
         server = Server(
@@ -24,12 +27,16 @@ class PrivateServer(pulumi.ComponentResource):
                     "ipv6_enabled": False,
                 }
             ],
-            networks=[{"network_id": str(private_network.id)}],
+            networks=[
+                {
+                    "network_id": network_id,
+                }
+            ],
             opts=pulumi.ResourceOptions(parent=self),
         )
 
         self.server = server
-        self.private_network = private_network
+        self.private_network = network
 
         self.register_outputs(
             {
