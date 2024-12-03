@@ -8,12 +8,6 @@ class PrivateServer(pulumi.ComponentResource):
         super().__init__("sys-int:servers:PrivateServer", f"server-private-{name}", None, opts)
         network_name = network.name
         network_id = network.id
-        super().__init__(
-            "sys-int:servers:PrivateServer",
-            f"{network_name}-{name}",
-            None,
-            opts,
-        )
         ic(network_id)
 
         # Create the server with private network interface
