@@ -32,7 +32,7 @@ class PrivateServer(pulumi.ComponentResource):
 
         self.register_outputs(
             {
-                "server": self.server,
-                "private_network": self.private_network,
+                "server": self.server.id,
+                "private_network": self.private_network.id,
             }
         )
