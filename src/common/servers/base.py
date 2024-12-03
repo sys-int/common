@@ -17,7 +17,7 @@ class PrivateServer(pulumi.ComponentResource):
             f"{network_name}-{name}-server",
             name=name,
             server_type=server_args["server_type"],
-            image=server_args["image"],
+            image="ubuntu-24.04",
             public_nets=[
                 {
                     "ipv4_enabled": False,
