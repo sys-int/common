@@ -11,7 +11,7 @@ class PrivateServer(pulumi.ComponentResource):
             None,
             opts,
         )
-
+        network = private_network.id.apply(lambda k: {"network_id": k})
         # Create the server with private network interface
         server = Server(
             f"{network_name}-{name}-server",
@@ -24,7 +24,7 @@ class PrivateServer(pulumi.ComponentResource):
                     "ipv6_enabled": False,
                 }
             ],
-            networks=[{"network_id": private_network.id}],
+            networks=[network],
             opts=pulumi.ResourceOptions(parent=self),
         )
 
