@@ -5,6 +5,7 @@ from pulumi_hcloud import Network, Server
 
 class PrivateServer(pulumi.ComponentResource):
     def __init__(self, name, network: Network, server_args, opts=None):
+        super().__init__("sys-int:servers:PrivateServer", f"server-private-{name}", None, opts)
         network_name = network.name
         network_id = network.id
         super().__init__(
