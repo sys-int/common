@@ -451,13 +451,13 @@ six = ">=1.12,<2.0"
 
 [[package]]
 name = "pulumi-aws"
-version = "6.62.1"
+version = "6.62.2"
 description = "A Pulumi package for creating and managing Amazon Web Services (AWS) cloud resources."
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "pulumi_aws-6.62.1-py3-none-any.whl", hash = "sha256:182541336cd50ea584509a9e532351084128e23fbea2b71ef61a41fa48dcd0f4"},
-    {file = "pulumi_aws-6.62.1.tar.gz", hash = "sha256:725a214857f309074b08fe3433caa4723315a137e3842a16adc02b5b553513b6"},
+    {file = "pulumi_aws-6.62.2-py3-none-any.whl", hash = "sha256:28064dd02133c1d934a31564638b675fe952dc5211d24ed1e697fe6d8de1e954"},
+    {file = "pulumi_aws-6.62.2.tar.gz", hash = "sha256:65cce594ae998e3ffd107c133613a4525db9912a13934f218bd67fc0eec6d163"},
 ]
 
 [package.dependencies]
@@ -467,18 +467,18 @@ semver = ">=2.8.1"
 
 [[package]]
 name = "pulumi-hcloud"
-version = "1.21.1"
+version = "1.20.0"
 description = "A Pulumi package for creating and managing hcloud cloud resources."
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "pulumi_hcloud-1.21.1-py3-none-any.whl", hash = "sha256:1b8be76e80e451e6659b0a2fd914b7ba3a4f43c9eae83665e143345834424dd8"},
-    {file = "pulumi_hcloud-1.21.1.tar.gz", hash = "sha256:59e469ba2fbe2b25128888aad38ab602ed82e8219faa472bd17a4953142e70a4"},
+    {file = "pulumi_hcloud-1.20.0-py3-none-any.whl", hash = "sha256:185979b3c124f6c1acdb99e95db376a1699b10cb51d21349d5be3bef25f53f1e"},
+    {file = "pulumi_hcloud-1.20.0.tar.gz", hash = "sha256:6c8f3309ced9b324e39a3bf6c0ed38e4ad72f5995e49ed725b07455534ed5a44"},
 ]
 
 [package.dependencies]
 parver = ">=0.2.1"
-pulumi = ">=3.136.0,<4.0.0"
+pulumi = ">=3.0.0,<4.0.0"
 semver = ">=2.8.1"
 
 [[package]]
@@ -651,4 +651,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.13"
-content-hash = "a0d9941ff631f2317f6de54970f3c108f1577a477206618600dd2e6d3aff0572"
+content-hash = "6530d6555fa278577a8b4bae9888687484de106650f2e4c6e6391c22dedb4340"
