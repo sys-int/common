@@ -467,18 +467,18 @@ semver = ">=2.8.1"
 
 [[package]]
 name = "pulumi-hcloud"
-version = "1.20.0"
+version = "1.21.1"
 description = "A Pulumi package for creating and managing hcloud cloud resources."
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "pulumi_hcloud-1.20.0-py3-none-any.whl", hash = "sha256:185979b3c124f6c1acdb99e95db376a1699b10cb51d21349d5be3bef25f53f1e"},
-    {file = "pulumi_hcloud-1.20.0.tar.gz", hash = "sha256:6c8f3309ced9b324e39a3bf6c0ed38e4ad72f5995e49ed725b07455534ed5a44"},
+    {file = "pulumi_hcloud-1.21.1-py3-none-any.whl", hash = "sha256:1b8be76e80e451e6659b0a2fd914b7ba3a4f43c9eae83665e143345834424dd8"},
+    {file = "pulumi_hcloud-1.21.1.tar.gz", hash = "sha256:59e469ba2fbe2b25128888aad38ab602ed82e8219faa472bd17a4953142e70a4"},
 ]
 
 [package.dependencies]
 parver = ">=0.2.1"
-pulumi = ">=3.0.0,<4.0.0"
+pulumi = ">=3.136.0,<4.0.0"
 semver = ">=2.8.1"
 
 [[package]]
@@ -651,4 +651,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.13"
-content-hash = "308ef3e04b6b9df5eb1c758cffe1b7632b14ba123d504091cab5f7e0fcfd1561"
+content-hash = "6484916abd8162a727e32e25e00db4651bc84f088dc212f77e5715337fc2999f"
