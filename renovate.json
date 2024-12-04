@@ -41,6 +41,11 @@
       "automerge": true,
       "groupName": "all major dependencies",
       "groupSlug": "all-major-patch"
+    },
+    {
+      "matchPackageNames": ["/parver/"],
+      "matchManagers": ["poetry"],
+      "enabled": false
     }
   ]
 }
