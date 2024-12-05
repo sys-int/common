@@ -1,10 +1,10 @@
-import pulumi
 from pulumi_hcloud import Network
 
+from common.clusters.cluster import Cluster
 from common.servers.base import PrivateServer
 
 
-class KubernetesCluster(pulumi.ComponentResource):
+class KubernetesCluster(Cluster):
     servers: list[PrivateServer]
     master: list[PrivateServer]
     nodes: list[PrivateServer]
@@ -19,20 +19,4 @@ class KubernetesCluster(pulumi.ComponentResource):
         server_type: str = "cx11",
         opts=None,
     ):
-        super().__init__("sys-int:cluster:Kubernetes", f"cluster-kubernetes-{name}", None, opts)
-        """Create a new cluster."""
-        for i in range(node_count):
-            server = PrivateServer(
-                f"{name}-node-{i}",
-                cluster_network,
-                {
-                    "server_type": server_type,
-                },
-            )
-            self.servers.append(server)
-            if i < master_nodes:
-                self.master.append(server)
-            else:
-                self.nodes.append(server)
-            pass
-        pass
+        super().__init__("Kubernetes", name, node_count, master_nodes, cluster_network, firewall_ip, server_type, opts)

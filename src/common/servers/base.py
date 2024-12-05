@@ -2,9 +2,11 @@ import pulumi
 from icecream import ic
 from pulumi_hcloud import Network, Server, ServerNetworkArgs
 
+import common.servers.user_data
+
 
 class PrivateServer(pulumi.ComponentResource):
-    def __init__(self, name, network: Network, server_args, opts=None):
+    def __init__(self, name, network: Network, firewall_io: str, server_args, opts=None):
         super().__init__("sys-int:servers:PrivateServer", f"server-private-{name}", None, opts)
         network_name = network.name
         network_id: int = int(network.id)
@@ -24,6 +26,7 @@ class PrivateServer(pulumi.ComponentResource):
                 }
             ],
             networks=[arg],
+            user_data=common.servers.user_data.create_user_data(firewall_ip="", private_networking=True),
             opts=pulumi.ResourceOptions(parent=self),
         )
 
