@@ -6,11 +6,17 @@ from pulumi_hcloud import Network
 
 def create_user_data(network: Network, firewall_ip: Output[str], private_networking: bool = False) -> str:
     dns_server = firewall_ip
-    gateway = firewall_ip.apply(
-        lambda x: x["privateIPs"][network.name][: x["privateIPs"][network.name].rfind(".") + 1] + "1"
+    gateway = Output.all(firewall=firewall_ip, network=network).apply(
+        lambda x: x["firewall"]["privateIPs"][network.name][
+            : x["firewall"]["privateIPs"][x["network"].name].rfind(".") + 1
+        ]
+        + "1"
     )
-    network = firewall_ip.apply(
-        lambda x: x["privateIPs"][network.name][: x["privateIPs"][network.name].rfind(".") + 1] + "0/24"
+    network = Output.all(firewall=firewall_ip, network=network).apply(
+        lambda x: x["firewall"]["privateIPs"][x["network"].name][
+            : x["firewall"]["privateIPs"][x["network"].name].rfind(".") + 1
+        ]
+        + "0/24"
     )
 
     result = f"""
