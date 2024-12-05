@@ -7,7 +7,7 @@ from pulumi_hcloud import Network
 def create_user_data(network: Network, firewall_ip: Output[str], private_networking: bool = False) -> str:
     dns_server = firewall_ip
     gateway = Output.all(firewall=firewall_ip, network=network).apply(
-        lambda x: x["firewall"]["privateIPs"][network.name][
+        lambda x: x["firewall"]["privateIPs"][x["network"].name][
             : x["firewall"]["privateIPs"][x["network"].name].rfind(".") + 1
         ]
         + "1"
