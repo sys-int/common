@@ -1,14 +1,9 @@
 from pulumi_hcloud import Network
 
 from common.clusters.cluster import Cluster
-from common.servers.base import PrivateServer
 
 
 class KubernetesCluster(Cluster):
-    servers: list[PrivateServer]
-    master: list[PrivateServer]
-    nodes: list[PrivateServer]
-
     def __init__(
         self,
         name,
