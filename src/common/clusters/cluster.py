@@ -5,6 +5,10 @@ from common.servers.base import PrivateServer
 
 
 class Cluster(pulumi.ComponentResource):
+    servers: list[PrivateServer]
+    master: list[PrivateServer]
+    nodes: list[PrivateServer]
+
     def __init__(
         self,
         type: str,
@@ -17,9 +21,7 @@ class Cluster(pulumi.ComponentResource):
         opts=None,
     ):
         super().__init__(f"sys-int:cluster:{type}", f"cluster-{type.lower()}-{name}", None, opts)
-        self.servers: list[PrivateServer]
-        self.master: list[PrivateServer]
-        self.nodes: list[PrivateServer]
+        print("SUPER")
         """Create a new cluster."""
         for i in range(node_count):
             server = PrivateServer(
