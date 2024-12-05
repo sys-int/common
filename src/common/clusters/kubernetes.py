@@ -15,4 +15,5 @@ class KubernetesCluster(Cluster):
         opts=None,
     ):
         super().__init__("Kubernetes", name, node_count, master_nodes, cluster_network, firewall_ip, server_type, opts)
+        print("KubernetesCluster " + self)
         pass
