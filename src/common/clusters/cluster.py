@@ -24,7 +24,7 @@ class Cluster(pulumi.ComponentResource):
         print("SUPER")
         """Create a new cluster."""
         for i in range(node_count):
-            PrivateServer(
+            server = PrivateServer(
                 f"{name}-node-{i}",
                 cluster_network,
                 firewall_ip,
@@ -33,6 +33,7 @@ class Cluster(pulumi.ComponentResource):
                 },
                 opts=pulumi.ResourceOptions(parent=self),
             )
+            self.nodes.append(server)
             # self.servers.append(server)
             # if i < master_nodes:
             #     self.master.append(server)
