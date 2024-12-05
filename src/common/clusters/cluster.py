@@ -31,7 +31,7 @@ class Cluster(pulumi.ComponentResource):
                     "server_type": server_type,
                 },
                 opts,
-            ).server
+            )
             self.servers.append(server)
             if i < master_nodes:
                 self.master.append(server)
