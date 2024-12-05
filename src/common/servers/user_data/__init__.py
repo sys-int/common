@@ -5,8 +5,13 @@ from pulumi_hcloud import Network
 
 
 def create_user_data(network: Network, firewall_ip: Output[str], private_networking: bool = False) -> str:
-    dns_server = firewall_ip
-    gateway = Output.all(firewall=firewall_ip, network=network).apply(
+    firewall_ip = Output.all(firewall=firewall_ip, network=network).apply(
+        lambda x: x["firewall"]["privateIPs"][x["network"].name]
+    )
+    dns_ip = Output.all(firewall=firewall_ip, network=network).apply(
+        lambda x: x["firewall"]["privateIPs"][x["network"].name]
+    )
+    gateway_ip = Output.all(firewall=firewall_ip, network=network).apply(
         lambda x: x["firewall"]["privateIPs"][x["network"].name][
             : x["firewall"]["privateIPs"][x["network"].name].rfind(".") + 1
         ]
@@ -50,19 +55,19 @@ def create_user_data(network: Network, firewall_ip: Output[str], private_network
                         mtu: 1450
                         routes:
                             - to: {network}
-                              via: {gateway}
+                              via: {gateway_ip}
                               on-link: true
-                            - to: {gateway}
+                            - to: {gateway_ip}
                               via: 0.0.0.0
                             - to: 0.0.0.0/0
-                              via: {gateway}
+                              via: {gateway_ip}
                               on-link: true
                             - to: 169.254.169.254/32
-                              via: {gateway}
+                              via: {gateway_ip}
                               on-link: true
                         nameservers:
                             addresses:
-                                - {dns_server}
+                                - {dns_ip}
               path: /etc/netplan/netplan.yaml
               permissions: '0644'
     """

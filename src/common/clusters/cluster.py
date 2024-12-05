@@ -33,11 +33,10 @@ class Cluster(pulumi.ComponentResource):
                 },
                 opts=pulumi.ResourceOptions(parent=self),
             )
-            self.nodes.append(server)
-            # self.servers.append(server)
-            # if i < master_nodes:
-            #     self.master.append(server)
-            # else:
-            #     self.nodes.append(server)
-            # pass
+            self.servers.append(server)
+            if i < master_nodes:
+                self.master.append(server)
+            else:
+                self.nodes.append(server)
+            pass
         pass
