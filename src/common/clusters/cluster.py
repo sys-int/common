@@ -5,9 +5,9 @@ from common.servers.base import PrivateServer
 
 
 class Cluster(pulumi.ComponentResource):
-    servers: list[PrivateServer]
-    master: list[PrivateServer]
-    nodes: list[PrivateServer]
+    servers: list[PrivateServer] = []
+    master: list[PrivateServer] = []
+    nodes: list[PrivateServer] = []
 
     def __init__(
         self,
