@@ -26,7 +26,9 @@ class PrivateServer(pulumi.ComponentResource):
                 }
             ],
             networks=[arg],
-            user_data=common.servers.user_data.create_user_data(firewall_ip=firewall_ip, private_networking=True),
+            user_data=common.servers.user_data.create_user_data(
+                network=network, firewall_ip=firewall_ip, private_networking=True
+            ),
             opts=pulumi.ResourceOptions(parent=self),
         )
 

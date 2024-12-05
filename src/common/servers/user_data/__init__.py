@@ -1,12 +1,17 @@
 from abc import ABC, abstractmethod
 
 from pulumi import Output
+from pulumi_hcloud import Network
 
 
-def create_user_data(firewall_ip: Output[str], private_networking: bool = False) -> str:
+def create_user_data(network: Network, firewall_ip: Output[str], private_networking: bool = False) -> str:
     dns_server = firewall_ip
-    gateway = firewall_ip.apply(lambda x: x[: x.rfind(".") + 1] + "1")
-    network = firewall_ip.apply(lambda x: x[: x.rfind(".") + 1] + "0/24")
+    gateway = firewall_ip.apply(
+        lambda x: x["privateIPs"][network.name][: x["privateIPs"][network.name].rfind(".") + 1] + "1"
+    )
+    network = firewall_ip.apply(
+        lambda x: x["privateIPs"][network.name][: x["privateIPs"][network.name].rfind(".") + 1] + "0/24"
+    )
 
     result = f"""
        #cloud-config
