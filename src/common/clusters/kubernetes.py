@@ -1,18 +1,12 @@
-from pulumi import Output
-from pulumi_hcloud import Network
-
 from common.clusters.cluster import Cluster
+from common.config.config import KubernetesConfig
 
 
 class KubernetesCluster(Cluster):
     def __init__(
         self,
-        name,
-        node_count: int,
-        master_nodes: int,
-        cluster_network: Network,
-        firewall: Output[str],
+        config: KubernetesConfig,
         opts=None,
     ):
-        super().__init__("Kubernetes", name, node_count, master_nodes, cluster_network, firewall, opts)
+        super().__init__("Kubernetes", config, opts)
         pass
