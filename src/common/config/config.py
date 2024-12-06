@@ -7,7 +7,7 @@ from pulumi_hcloud import Network
 class Config:
     current_network: Network
     networks: dict[str, Any]
-    ssh_keys: list[str]
+    ssh_keys: list[str] = []
     firewall: Output[str]
 
 
