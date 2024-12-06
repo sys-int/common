@@ -23,8 +23,12 @@ class Cluster(pulumi.ComponentResource):
         super().__init__(f"sys-int:cluster:{type}", f"cluster-{type.lower()}-{name}", None, opts)
         """Create a new cluster."""
         for i in range(node_count):
+            if i < master_nodes:
+                node_name = f"{name}-master-{i}"
+            else:
+                node_name = f"{name}-node-{i}"
             server = PrivateServer(
-                f"{name}-node-{i}",
+                node_name,
                 cluster_network,
                 firewall_ip,
                 {
