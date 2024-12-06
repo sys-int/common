@@ -23,7 +23,7 @@ class Cluster(pulumi.ComponentResource):
             server_type = KUBERNETES_MASTER_TYPE
             server = PrivateServer(
                 node_name,
-                config.networks,
+                config.current_network,
                 config.firewall,
                 config.ssh_keys,
                 {
@@ -37,7 +37,7 @@ class Cluster(pulumi.ComponentResource):
             server_type = KUBERNETES_NODE_TYPE
             server = PrivateServer(
                 node_name,
-                config.networks,
+                config.current_network,
                 config.firewall,
                 config.ssh_keys,
                 {
