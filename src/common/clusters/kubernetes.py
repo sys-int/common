@@ -14,8 +14,5 @@ class KubernetesCluster(Cluster):
         server_type: str = "cx11",
         opts=None,
     ):
-        print("KubernetesCluster1 " + repr(self))
         super().__init__("Kubernetes", name, node_count, master_nodes, cluster_network, firewall_ip, server_type, opts)
-        print("KubernetesCluster2 " + repr(self))
-
         pass
