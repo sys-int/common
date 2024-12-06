@@ -1,9 +1,14 @@
 import pulumi
-from pulumi import Output
+from pulumi import Output, StackReference
 from pulumi_hcloud import Network, Server, ServerNetworkArgs
 
 import common.servers.user_data
 from common.constants import SERVER_IMAGE
+
+
+def get_ssh_keys():
+    base_stack = StackReference("eBeyond/base/main")
+    return base_stack.get_output("ssh_keys")
 
 
 class PrivateServer(pulumi.ComponentResource):
@@ -29,6 +34,7 @@ class PrivateServer(pulumi.ComponentResource):
             user_data=common.servers.user_data.create_user_data(
                 network=network, firewall=firewall, private_networking=True
             ),
+            ssh_keys=get_ssh_keys(),
             opts=pulumi.ResourceOptions(parent=self),
         )
 
