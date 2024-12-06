@@ -1,6 +1,8 @@
 import pulumi
+from pulumi import Output
 from pulumi_hcloud import Network
 
+from common.constants import KUBERNETES_MASTER_TYPE, KUBERNETES_NODE_TYPE
 from common.servers.base import PrivateServer
 
 
@@ -16,8 +18,7 @@ class Cluster(pulumi.ComponentResource):
         node_count: int,
         master_nodes: int,
         cluster_network: Network,
-        firewall_ip: str,
-        server_type: str = "cx11",
+        firewall: Output[str],
         opts=None,
     ):
         super().__init__(f"sys-int:cluster:{type}", f"cluster-{type.lower()}-{name}", None, opts)
@@ -25,12 +26,14 @@ class Cluster(pulumi.ComponentResource):
         for i in range(node_count):
             if i < master_nodes:
                 node_name = f"{name}-master-{i}"
+                server_type = KUBERNETES_MASTER_TYPE
             else:
                 node_name = f"{name}-node-{i}"
+                server_type = KUBERNETES_NODE_TYPE
             server = PrivateServer(
                 node_name,
                 cluster_network,
-                firewall_ip,
+                firewall,
                 {
                     "server_type": server_type,
                 },

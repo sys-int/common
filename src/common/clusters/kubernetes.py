@@ -1,3 +1,4 @@
+from pulumi import Output
 from pulumi_hcloud import Network
 
 from common.clusters.cluster import Cluster
@@ -10,9 +11,8 @@ class KubernetesCluster(Cluster):
         node_count: int,
         master_nodes: int,
         cluster_network: Network,
-        firewall_ip: str,
-        server_type: str = "cx11",
+        firewall: Output[str],
         opts=None,
     ):
-        super().__init__("Kubernetes", name, node_count, master_nodes, cluster_network, firewall_ip, server_type, opts)
+        super().__init__("Kubernetes", name, node_count, master_nodes, cluster_network, firewall, opts)
         pass

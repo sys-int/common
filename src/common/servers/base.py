@@ -1,16 +1,16 @@
 import pulumi
-from icecream import ic
+from pulumi import Output
 from pulumi_hcloud import Network, Server, ServerNetworkArgs
 
 import common.servers.user_data
+from common.constants import SERVER_IMAGE
 
 
 class PrivateServer(pulumi.ComponentResource):
-    def __init__(self, name, network: Network, firewall_ip: str, server_args, opts=None):
+    def __init__(self, name, network: Network, firewall: Output[str], server_args, opts=None):
         super().__init__("sys-int:servers:PrivateServer", f"server-private-{name}", None, opts)
         network_name = network.name
         network_id: int = int(network.id)
-        ic(network_id)
         arg = ServerNetworkArgs(network_id=network_id)
 
         # Create the server with private network interface
@@ -18,7 +18,7 @@ class PrivateServer(pulumi.ComponentResource):
             f"{network_name}-{name}-server",
             name=name,
             server_type=server_args["server_type"],
-            image="ubuntu-24.04",
+            image=SERVER_IMAGE,
             public_nets=[
                 {
                     "ipv4_enabled": False,
@@ -27,7 +27,7 @@ class PrivateServer(pulumi.ComponentResource):
             ],
             networks=[arg],
             user_data=common.servers.user_data.create_user_data(
-                network=network, firewall=firewall_ip, private_networking=True
+                network=network, firewall=firewall, private_networking=True
             ),
             opts=pulumi.ResourceOptions(parent=self),
         )
