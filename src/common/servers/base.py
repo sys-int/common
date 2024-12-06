@@ -7,7 +7,7 @@ from common.constants import SERVER_IMAGE
 
 
 def get_ssh_keys():
-    base_stack = StackReference("eBeyond/base/main")
+    base_stack = StackReference("private-server-ssh-stack", "eBeyond/base/main")
     return base_stack.get_output("ssh_keys")
 
 
