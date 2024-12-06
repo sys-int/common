@@ -9,7 +9,7 @@ packages = [{ include = "common", from = "src" }]
 [tool.poetry.dependencies]
 python = "^3.13"
 pulumi = "^3.35.3"
-pulumi-hcloud = "1.21.1"
+pulumi-hcloud = "^1.21.1"
 icecream = "^2.0.0"
 pulumi-aws = "^6.61.0"
 
