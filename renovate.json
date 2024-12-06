@@ -18,8 +18,34 @@
   "packageRules": [
     {
       "description": "Automatically merge minor and patch-level updates",
-      "matchUpdateTypes": ["minor", "patch", "digest"],
-      "automerge": true
+      "matchUpdateTypes": [
+        "minor",
+        "patch",
+        "digest"
+      ],
+      "matchPackagePatterns": [
+        "*"
+      ],
+      "automerge": true,
+      "groupName": "all non-major dependencies",
+      "groupSlug": "all-minor-patch"
+    },
+    {
+      "description": "Automatically merge major updates",
+      "matchUpdateTypes": [
+        "major"
+      ],
+      "matchPackagePatterns": [
+        "*"
+      ],
+      "automerge": true,
+      "groupName": "all major dependencies",
+      "groupSlug": "all-major-patch"
+    },
+    {
+      "matchPackageNames": ["/parver/"],
+      "matchManagers": ["poetry"],
+      "enabled": false
     }
   ]
 }
