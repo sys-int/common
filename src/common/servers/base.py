@@ -12,7 +12,7 @@ def get_ssh_keys():
 
 
 class PrivateServer(pulumi.ComponentResource):
-    def __init__(self, name, network: Network, firewall: Output[str], ssh_keys, server_args, opts=None):
+    def __init__(self, name, network: Network, firewall: Output[str], ssh_keys, server_type: str = "CX22", opts=None):
         super().__init__("sys-int:servers:PrivateServer", f"server-private-{name}", None, opts)
         network_name = network.name
         network_id: int = int(network.id)
@@ -22,7 +22,7 @@ class PrivateServer(pulumi.ComponentResource):
         server = Server(
             f"{network_name}-{name}-server",
             name=name,
-            server_type=server_args["server_type"],
+            server_type=server_type,
             image=SERVER_IMAGE,
             public_nets=[
                 {

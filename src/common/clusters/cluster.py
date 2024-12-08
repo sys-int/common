@@ -26,9 +26,7 @@ class Cluster(pulumi.ComponentResource):
                 config.current_network,
                 config.firewall,
                 config.ssh_keys,
-                {
-                    "server_type": server_type,
-                },
+                server_type,
                 opts=pulumi.ResourceOptions(parent=self),
             )
             self.master.append(server)
@@ -40,9 +38,7 @@ class Cluster(pulumi.ComponentResource):
                 config.current_network,
                 config.firewall,
                 config.ssh_keys,
-                {
-                    "server_type": server_type,
-                },
+                server_type,
                 opts=pulumi.ResourceOptions(parent=self),
             )
             self.master.append(server)
