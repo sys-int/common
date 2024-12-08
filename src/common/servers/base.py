@@ -2,7 +2,6 @@ import pulumi
 from pulumi import Output, StackReference
 from pulumi_hcloud import AwaitableGetNetworkResult, Server, ServerNetworkArgs
 
-import common.servers.user_data
 from common.constants import SERVER_IMAGE
 
 
@@ -38,9 +37,9 @@ class PrivateServer(pulumi.ComponentResource):
                 }
             ],
             networks=[arg],
-            user_data=common.servers.user_data.create_user_data(
-                network=network, firewall=firewall, private_networking=True
-            ),
+            # user_data=common.servers.user_data.create_user_data(
+            #     network=network, firewall=firewall, private_networking=True
+            # ),
             ssh_keys=ssh_keys,
             opts=pulumi.ResourceOptions(parent=self),
         )
