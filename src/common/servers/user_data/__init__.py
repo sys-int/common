@@ -1,12 +1,10 @@
 from abc import ABC, abstractmethod
 
 from pulumi import Output
-from pulumi_hcloud import AwaitableGetNetworkResult
+from pulumi_hcloud import GetNetworkResult
 
 
-def create_user_data(
-    network: AwaitableGetNetworkResult, firewall: Output[str], private_networking: bool = False
-) -> Output[str]:
+def create_user_data(network: GetNetworkResult, firewall: Output[str], private_networking: bool = False) -> Output[str]:
     firewall_ip = Output.all(firewall=firewall, network=network).apply(
         lambda x: x["firewall"]["privateIPs"][x["network"].name]
     )
