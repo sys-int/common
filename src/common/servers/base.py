@@ -1,6 +1,6 @@
 import pulumi
 from pulumi import Output, StackReference
-from pulumi_hcloud import Network, Server, ServerNetworkArgs
+from pulumi_hcloud import AwaitableGetNetworkResult, Server, ServerNetworkArgs
 
 import common.servers.user_data
 from common.constants import SERVER_IMAGE
@@ -12,11 +12,18 @@ def get_ssh_keys():
 
 
 class PrivateServer(pulumi.ComponentResource):
-    def __init__(self, name, network: Network, firewall: Output[str], ssh_keys, server_type: str = "CX22", opts=None):
+    def __init__(
+        self,
+        name,
+        network: AwaitableGetNetworkResult,
+        firewall: Output[str],
+        ssh_keys,
+        server_type: str = "cx22",
+        opts=None,
+    ):
         super().__init__("sys-int:servers:PrivateServer", f"server-private-{name}", None, opts)
         network_name = network.name
-        network_id: int = int(network.id)
-        arg = ServerNetworkArgs(network_id=network_id)
+        arg = ServerNetworkArgs(network_id=network.id)
 
         # Create the server with private network interface
         server = Server(
