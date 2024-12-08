@@ -1,11 +1,11 @@
 from typing import Any
 
 from pulumi import Output
-from pulumi_hcloud import Network
+from pulumi_hcloud import GetNetworkResult
 
 
 class Config:
-    current_network: Network
+    current_network: GetNetworkResult
     networks: dict[str, Any]
     ssh_keys: list[str] = []
     firewall: Output[str]

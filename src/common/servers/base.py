@@ -1,6 +1,6 @@
 import pulumi
 from pulumi import Output, StackReference
-from pulumi_hcloud import AwaitableGetNetworkResult, Server, ServerNetworkArgs
+from pulumi_hcloud import GetNetworkResult, Server, ServerNetworkArgs
 
 from common.constants import SERVER_IMAGE
 from common.servers import user_data
@@ -15,7 +15,7 @@ class PrivateServer(pulumi.ComponentResource):
     def __init__(
         self,
         name,
-        network: AwaitableGetNetworkResult,
+        network: GetNetworkResult,
         firewall: Output[str],
         ssh_keys,
         server_type: str = "cx22",
