@@ -37,7 +37,7 @@ runcmd:
     - systemctl restart ssh
     - export IFACE=$(ip -br l | awk '$1 !~ "lo|vir|wl|ve|br|do" {{ print $1}}')
     - sed -ie 's/IFACE/'"$IFACE"'/g' /etc/netplan/netplan.yaml
-    - export IPADDRESS=$(ip -br a | awk '$1 == "$IFACE" {{ print $3}}' | cut -d/ -f1)
+    - export IPADDRESS=$(ip -br a | awk '$1 == "'"$IFACE"'" {{ print $3}}' | cut -d/ -f1)
     - sed -ie 's/IPADDRESS/'"$IPADDRESS"'/g' /etc/netplan/netplan.yaml
     - netplan apply
 write_files:
@@ -52,7 +52,7 @@ write_files:
         ethernets:
             IFACE:
                 addresses:
-                    - IPADDRESS/32
+                    - IPADDRESS
                 mtu: 1450
                 routes:
                     - to: {x["network"]}
