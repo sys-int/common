@@ -19,7 +19,7 @@ class Cluster(pulumi.ComponentResource):
         super().__init__(f"sys-int:cluster:{type}", f"cluster-{type.lower()}-{config.cluster_name}", None, opts)
         """Create a new cluster."""
         for i in range(config.master_nodes):
-            node_name = f"{config.cluster_name}-master-{i}"
+            node_name = f"{config.cluster_name}-master-{i + 1:02d}"
             server_type = KUBERNETES_MASTER_TYPE
             server = PrivateServer(
                 node_name,
@@ -31,7 +31,7 @@ class Cluster(pulumi.ComponentResource):
             )
             self.master.append(server)
         for i in range(config.node_count):
-            node_name = f"{config.cluster_name}-node-{i}"
+            node_name = f"{config.cluster_name}-node-{i + 1:02d}"
             server_type = KUBERNETES_NODE_TYPE
             server = PrivateServer(
                 node_name,
