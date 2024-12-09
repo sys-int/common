@@ -52,7 +52,7 @@ write_files:
             ethernets:
                 IFACE:
                     addresses:
-                        - IPADDRESS
+                        - IPADDRESS/32
                     mtu: 1450
                     routes:
                         - to: {x["network"]}
@@ -68,7 +68,7 @@ write_files:
                           on-link: true
                     nameservers:
                         addresses:
-                    - {x["dns_ip"]}
+                            - {x["dns_ip"]}
       path: /etc/netplan/netplan.yaml
       permissions: '0644'
     """
