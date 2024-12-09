@@ -46,28 +46,28 @@ write_files:
       permissions: '0644'
       path: /etc/cloud/cloud.cfg.d/99-disable-network-config.cfg
     - content: |
-network:
-    version: 2
-    renderer: networkd
-    ethernets:
-        IFACE:
-            addresses:
-                - IPADDRESS
-            mtu: 1450
-            routes:
-                - to: {x["network"]}
-                  via: {x["gateway_ip"]}
-                  on-link: true
-                - to: {x["gateway_ip"]}
-                  via: 0.0.0.0
-                - to: 0.0.0.0/0
-                  via: {x["gateway_ip"]}
-                  on-link: true
-                - to: 169.254.169.254/32
-                  via: {x["gateway_ip"]}
-                  on-link: true
-            nameservers:
-                addresses:
+        network:
+            version: 2
+            renderer: networkd
+            ethernets:
+                IFACE:
+                    addresses:
+                        - IPADDRESS
+                    mtu: 1450
+                    routes:
+                        - to: {x["network"]}
+                          via: {x["gateway_ip"]}
+                          on-link: true
+                        - to: {x["gateway_ip"]}
+                          via: 0.0.0.0
+                        - to: 0.0.0.0/0
+                          via: {x["gateway_ip"]}
+                          on-link: true
+                        - to: 169.254.169.254/32
+                          via: {x["gateway_ip"]}
+                          on-link: true
+                    nameservers:
+                        addresses:
                     - {x["dns_ip"]}
       path: /etc/netplan/netplan.yaml
       permissions: '0644'
