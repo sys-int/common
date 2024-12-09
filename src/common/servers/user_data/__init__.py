@@ -36,9 +36,9 @@ runcmd:
     - sed -ie '/^#AllowAgentForwarding/s/^.*$/AllowAgentForwarding yes/' /etc/ssh/sshd_config
     - systemctl restart ssh
     - export IFACE=$(ip -br l | awk '$1 !~ "lo|vir|wl|ve|br|do" {{ print $1}}')
-    - sed -ie 's/IFACE/$IFACE/g' /etc/netplan/netplan.yaml
+    - sed -ie 's/IFACE/'"$IFACE"'/g' /etc/netplan/netplan.yaml
     - export IPADDRESS=$(ip -br a | awk '$1 == "$IFACE" {{ print $3}}' | cut -d/ -f1)
-    - sed -ie 's/IPADDRESS/$IPADDRESS/g' /etc/netplan/netplan.yaml
+    - sed -ie 's/IPADDRESS/'"$IPADDRESS"'/g' /etc/netplan/netplan.yaml
     - netplan apply
 write_files:
     - content: |
