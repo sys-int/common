@@ -53,7 +53,7 @@ network:
         IFACE:
             addresses:
                 - IPADDRESS
-                mtu: 1450
+            mtu: 1450
             routes:
                 - to: {x["network"]}
                   via: {x["gateway_ip"]}
