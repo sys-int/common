@@ -8,7 +8,6 @@ def create_user_data(network: GetNetworkResult, firewall: Output[str], private_n
     firewall_ip = Output.all(firewall=firewall, network=network).apply(
         lambda x: x["firewall"]["privateIPs"][x["network"].name]
     )
-    exit(0)
     dns_ip = Output.all(firewall=firewall, network=network).apply(
         lambda x: x["firewall"]["privateIPs"][x["network"].name]
     )
