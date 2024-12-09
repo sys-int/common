@@ -31,6 +31,7 @@ class PrivateServer(pulumi.ComponentResource):
             name=name,
             server_type=server_type,
             image=SERVER_IMAGE,
+            location="nbg1",
             public_nets=[
                 {
                     "ipv4_enabled": False,
